@@ -8,5 +8,20 @@ app=Flask(__name__)
 def index():
 	return render_template('home.html')
 
+
+@app.route("/register",methods=['GET',"POST"])
+def register():
+	if request.method == "GET":
+		return render_template("register.html")
+	if request.method == "POST":
+		app.logger.info(request.form)
+		# return redirect(url_for('index'))
+		return render_template("register.html")
+
+@app.route("/login",methods=['GET',"POST"])
+def login():
+	if request.method == 'GET':
+		return render_template('login.html')
+
 if(__name__ == "__main__"):
 	app.run(debug=True,host='0.0.0.0',port=8080)
