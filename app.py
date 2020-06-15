@@ -31,7 +31,7 @@ def about():
 	
 @app.route("/gallery")
 def gallery():
-	return 'gallery'
+	return render_template('gallery.html')
 
 @app.route("/events")
 def events():
