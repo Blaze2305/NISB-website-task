@@ -6,33 +6,59 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Login</title>
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="../static/css/login.css">
 </head>
 
-
+	 
   <body>
-	<div class="form_wrapper">
-		<div class="form_container">
-		  <div class="title_container">
-			<h2>Login</h2>
-		  </div>
-		  <div class="row clearfix">
-			<div class="">
-			  <form action='register' method="POST">
-				<div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
-					<input type="text" name="ieee_num" placeholder="IEEE number" required />
-				  </div>
-				<div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-				  <input type="password" name="password" placeholder="Password" id='password' required />
+	  <div class="form_wrapper">
+		  <div class="form_container">
+			  <div class="title_container">
+				  <h2>Login</h2>
 				</div>
-				<input class="button" type="submit"/>
-			  </form>
+				<div class="row clearfix">
+					<div class="col">
+						<form action='login' method="POST">
+							<div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+								<input type="text" name="ieee_num" placeholder="IEEE number"  onkeyup='check_ieee_num();' required />
+							</div>
+							<span id='ieee_num_message'></span>
+							
+							<div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+								<input type="password" name="password" placeholder="Password" id='password' required />
+							</div>
+							<input class="button" type="submit"/>
+						</form>
+					</div>
 				</div>
+				{% if  invalid_creds %}
+					<div class="alert alert-danger">
+						<strong>Invalid credentials!</strong> <br> Check your password or IEEE number.
+					</div>
+				{% endif %}
+				<hr>
+				<div style="text-align:center;">New here? 	<span><a href="{{url_for('register')}}">Register</a></span></div>
 			</div>
-			<hr>
-			<div style="text-align:center;">New here? 	<span><a href="{{url_for('register')}}">Register</a></span></div>
-		  </div>
-		</div>
-	  </div>  
+			</div>
+		</div>  
+		
   </body>
+
+  <script>
+	var check_ieee_num = ()=>{
+
+		if (!/[a-z]/.test(document.getElementById('ieee_num').value)){
+			document.getElementById('ieee_num_message').style.color = 'red';
+			document.getElementById('ieee_num_message').innerHTML = '';
+			document.getElementById('submit_button').disabled=false
+		}else{
+			document.getElementById('ieee_num_message').style.color = 'red';
+			document.getElementById('ieee_num_message').style.fontSize = '10px	';
+			document.getElementById('ieee_num_message').innerHTML = 'IEEE Number must not contain alphabets';
+			document.getElementById('submit_button').disabled=true
+		}
+}
+  </script>
 </html>

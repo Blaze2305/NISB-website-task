@@ -20,6 +20,9 @@ body {
   background-size: cover;
   background-position: center;
 }
+body::-webkit-scrollbar {
+	display: none;
+}
 
 .hero-box-container {
   display: -webkit-box;

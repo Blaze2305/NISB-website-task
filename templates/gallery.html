@@ -21,10 +21,16 @@
 					<h1 class='header-branding__title' style="color:white;font-size:20px">NIE IEEE Student Branch</h1>
 			  </a>
 		  </div>
+		  {% if session['user'] %}
+		  <div class='header-links'>
+			<a href="{{url_for('logout')}}" class='header-links__anchor' style="color: white;">logout</a>
+		  </div>
+		  {% else %}
 		  <div class='header-links'>
 			  <a href="{{url_for('login')}}" class='header-links__anchor' style="color: white;">Login</a>
 			  <a href="{{url_for('register')}}" class='header-links__anchor' style="color: white;">Register</a>
-			</div>
+		</div>
+		{% endif %}
 		</header>
 
 

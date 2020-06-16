@@ -19,12 +19,12 @@
 				<div class="row clearfix">
 					<div class="col_half">
 					  <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
-						<input type="text" name="name" placeholder="First Name" />
+						<input type="text" name="fname" placeholder="First Name" />
 					  </div>
 					</div>
 					<div class="col_half">
 					  <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
-						<input type="text" name="name" placeholder="Last Name" required />
+						<input type="text" name="lname" placeholder="Last Name" required />
 					  </div>
 					</div>
 				  </div>
@@ -32,8 +32,9 @@
 				  <input type="email" name="email" placeholder="Email"  required />
 				</div>
 				<div class="input_field"> <span><i aria-hidden="true" class="fa fa-address-card-o"></i></span>
-					<input type="text" name="ieee_num" placeholder="IEEE number" required />
-				  </div>
+					<input id='ieee_num' type="text" name="ieee_num" placeholder="IEEE number" onkeyup='check_ieee_num();' required />
+				</div>
+				<span id='ieee_num_message'></span>
 				<div class="input_field select_option">	
 				<select id='branch' name='branch'>
 					<option>Branch</option>
@@ -75,7 +76,7 @@
 </style>
 
 <script>
-	var check = function() {
+	var check = ()=>{
 			if (document.getElementById('password').value == document.getElementById('confirm_password').value) {
 				document.getElementById('message').style.color = 'green';
 				document.getElementById('message').innerHTML = '&#10004; Passwords match';
@@ -84,6 +85,22 @@
 				document.getElementById('message').style.color = 'red';
 				document.getElementById('message').innerHTML = '&#10006 Passwords not matching';
 				document.getElementById('submit_button').disabled=true
+
 			}
 		}
+
+
+	var check_ieee_num = ()=>{
+
+			if (!/[a-z]/.test(document.getElementById('ieee_num').value)){
+				document.getElementById('ieee_num_message').style.color = 'red';
+				document.getElementById('ieee_num_message').innerHTML = '';
+				document.getElementById('submit_button').disabled=false
+			}else{
+				document.getElementById('ieee_num_message').style.color = 'red';
+				document.getElementById('ieee_num_message').style.fontSize = '10px	';
+				document.getElementById('ieee_num_message').innerHTML = 'IEEE Number must not contain alphabets';
+				document.getElementById('submit_button').disabled=true
+			}
+	}
 </script>
